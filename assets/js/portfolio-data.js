@@ -13,8 +13,9 @@ window.portfolioItems = [
     title: 'Fractured Light',
     category: 'Narrative',
     media: {
-      type: 'youtube',
-      url: 'https://www.youtube-nocookie.com/embed/qrTbU_Yn6QM?si=OND_IGA0yMWVEJBm'
+      type: 'video',
+      src: 'assets/Videos/say-something-student-music-video-derek-hansen-2160-ytshorts.savetube.me.mp4',
+      poster: 'assets/images/project-narrative.svg'
     },
     image: 'assets/images/project-narrative.svg',
     description: 'A short narrative piece exploring memory and place through natural light and minimal dialogue.',
