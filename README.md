@@ -28,6 +28,7 @@ A clean, cinematic, dark-themed **four-page** personal portfolio website for **D
 - Dark cinematic theme with cyan/orange accents
 - Reusable shared layout and footer
 - Portfolio card filtering by category
+- Portfolio cards that support **YouTube embeds**, **self-hosted video**, or **image fallback**
 - Optional front-end-only contact form handler
 - Resume page with drop-in PDF integration path
 - Responsive design for desktop/tablet/mobile
@@ -55,6 +56,8 @@ Portfolio_DerekHansen/
     │   ├── project-educational.svg
     │   ├── project-collab.svg
     │   └── project-collab-2.svg
+    ├── videos/
+    │   └── your-video-file.mp4      (optional, for self-hosted project media)
     └── resume/
         └── derek-hansen-resume.pdf  (add this file)
 ```
@@ -102,14 +105,81 @@ server {
 - Edit directly in `index.html`, `contact.html`, and `resume.html`.
 
 ### Portfolio entries (primary expansion point)
-- Edit `assets/js/portfolio-data.js`.
-- Fields per entry:
-  - `title`
-  - `category`
-  - `image`
-  - `description`
-  - `roles` (optional)
-  - `link` (optional)
+Edit `assets/js/portfolio-data.js`.
+
+Each project object supports these fields:
+- `title` (string)
+- `category` (string)
+- `description` (string)
+- `roles` (string, optional)
+- `link` (string URL, optional)
+- `image` (string path, used as fallback thumbnail)
+- `media` (object, optional)
+
+`media` can be one of the following:
+
+#### 1) YouTube video
+Use this when the project can be hosted on YouTube.
+
+```js
+{
+  title: 'Project Name',
+  category: 'Narrative',
+  media: {
+    type: 'youtube',
+    url: 'https://www.youtube.com/watch?v=VIDEO_ID'
+  },
+  image: 'assets/images/project-narrative.svg',
+  description: '...',
+  roles: '...',
+  link: 'https://example.com'
+}
+```
+
+Accepted YouTube URL formats:
+- `https://www.youtube.com/watch?v=VIDEO_ID`
+- `https://youtu.be/VIDEO_ID`
+- `https://www.youtube.com/embed/VIDEO_ID`
+- `https://www.youtube-nocookie.com/embed/VIDEO_ID`
+
+Implementation note: embeds are rendered through `youtube-nocookie.com` with an `origin` query parameter (when available) to improve reliability in browsers that enforce stricter referrer checks.
+
+#### 2) Self-hosted/raw video file
+Use this when the video cannot be on YouTube.
+
+1. Add your video file to `assets/videos/` (example: `assets/videos/client-cut.mp4`).
+2. Reference it in the project entry with `media.type = 'video'`.
+3. Optionally provide a `poster` image shown before playback starts.
+
+```js
+{
+  title: 'Project Name',
+  category: 'Corporate',
+  media: {
+    type: 'video',
+    src: 'assets/videos/client-cut.mp4',
+    poster: 'assets/images/project-corporate.svg' // optional
+  },
+  image: 'assets/images/project-corporate.svg',
+  description: '...',
+  roles: '...',
+  link: ''
+}
+```
+
+#### 3) Image-only fallback
+If `media` is missing or invalid, the card renders `image` as a static thumbnail.
+
+```js
+{
+  title: 'Project Name',
+  category: 'Educational',
+  image: 'assets/images/project-educational.svg',
+  description: '...',
+  roles: '...',
+  link: 'https://example.com'
+}
+```
 
 ### Theme + layout
 - Edit `assets/css/styles.css`.
@@ -123,4 +193,3 @@ To update Derek’s resume regularly:
 4. Refresh `resume.html`.
 
 No additional code changes are required.
-
