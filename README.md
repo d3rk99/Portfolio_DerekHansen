@@ -140,6 +140,9 @@ Accepted YouTube URL formats:
 - `https://www.youtube.com/watch?v=VIDEO_ID`
 - `https://youtu.be/VIDEO_ID`
 - `https://www.youtube.com/embed/VIDEO_ID`
+- `https://www.youtube-nocookie.com/embed/VIDEO_ID`
+
+Implementation note: embeds are rendered through `youtube-nocookie.com` with an `origin` query parameter (when available) to improve reliability in browsers that enforce stricter referrer checks.
 
 #### 2) Self-hosted/raw video file
 Use this when the video cannot be on YouTube.

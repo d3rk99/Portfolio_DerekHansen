@@ -13,27 +13,33 @@
     try {
       const parsed = new URL(url);
       const host = parsed.hostname.replace('www.', '');
+      let videoId = '';
 
       if (host === 'youtu.be') {
-        const id = parsed.pathname.slice(1);
-        return id ? `https://www.youtube.com/embed/${id}` : '';
-      }
-
-      if (host === 'youtube.com' || host === 'm.youtube.com') {
+        videoId = parsed.pathname.slice(1);
+      } else if (host === 'youtube.com' || host === 'm.youtube.com' || host === 'youtube-nocookie.com') {
         if (parsed.pathname === '/watch') {
-          const id = parsed.searchParams.get('v');
-          return id ? `https://www.youtube.com/embed/${id}` : '';
-        }
-
-        if (parsed.pathname.startsWith('/embed/')) {
-          return url;
+          videoId = parsed.searchParams.get('v') || '';
+        } else if (parsed.pathname.startsWith('/embed/')) {
+          videoId = parsed.pathname.split('/embed/')[1] || '';
         }
       }
+
+      if (!videoId) return '';
+
+      const params = new URLSearchParams({
+        rel: '0',
+        modestbranding: '1'
+      });
+
+      if (window.location?.origin && window.location.origin.startsWith('http')) {
+        params.set('origin', window.location.origin);
+      }
+
+      return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
     } catch (_error) {
       return '';
     }
-
-    return '';
   }
 
   function renderProjectMedia(item) {
@@ -49,7 +55,7 @@
               loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
-              referrerpolicy="strict-origin-when-cross-origin"
+              referrerpolicy="origin"
             ></iframe>
           </div>
         `;
