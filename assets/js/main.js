@@ -45,7 +45,7 @@
   navToggle?.addEventListener('click', () => {
     const expanded = navToggle.getAttribute('aria-expanded') === 'true';
     navToggle.setAttribute('aria-expanded', String(!expanded));
-    siteNav.classList.toggle('open');
+    siteNav?.classList.toggle('open');
   });
 
   siteNav?.querySelectorAll('a').forEach((link) => {
@@ -55,27 +55,41 @@
     });
   });
 
+  // Highlight current page in nav.
+  const currentPage = document.body.dataset.page;
+  if (currentPage) {
+    document.querySelector(`.site-nav a[data-nav="${currentPage}"]`)?.classList.add('is-current');
+  }
+
   // Lightweight static form handler for v1.
   contactForm?.addEventListener('submit', (event) => {
     event.preventDefault();
-    feedback.textContent = 'Thanks for your message. Connect this form to a backend service when ready.';
+    if (feedback) {
+      feedback.textContent = 'Thanks for your message. Connect this form to a backend service when ready.';
+    }
     contactForm.reset();
   });
 
   // Subtle reveal animation.
   const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-  reveals.forEach((item) => observer.observe(item));
+  if (reveals.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    reveals.forEach((item) => observer.observe(item));
+  }
 
-  document.getElementById('year').textContent = new Date().getFullYear();
+  const yearEl = document.getElementById('year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+
   renderCards();
 })();

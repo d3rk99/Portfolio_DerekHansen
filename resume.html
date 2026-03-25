@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Resume page for Derek Hansen with a stylized overview and optional embedded PDF for regular updates."
+    />
+    <title>Derek Hansen | Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body data-page="resume">
+    <header class="site-header" id="top">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand" aria-label="Derek Hansen home">Derek Hansen</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+        <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+          <a href="index.html" data-nav="about">About</a>
+          <a href="portfolio.html" data-nav="portfolio">Portfolio</a>
+          <a href="contact.html" data-nav="contact">Contact</a>
+          <a href="resume.html" data-nav="resume">Resume</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section-divider page-hero compact-hero">
+        <div class="container hero-content reveal">
+          <p class="eyebrow">Resume</p>
+          <h1>Professional experience, skills, and production background.</h1>
+          <p class="hero-copy">
+            This page includes a stylized resume overview and supports a drop-in PDF so updates are easy and regular.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="assets/resume/derek-hansen-resume.pdf" target="_blank" rel="noreferrer">
+              Open Resume PDF
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-divider">
+        <div class="container reveal resume-grid">
+          <article class="resume-panel">
+            <h2>Summary</h2>
+            <p>
+              Emerging filmmaker and media professional with hands-on experience in pre-production, production, and
+              post-production. Focused on delivering clear, emotionally resonant storytelling in collaborative settings.
+            </p>
+
+            <h3>Core Skills</h3>
+            <ul class="skills-list">
+              <li>Video Editing</li>
+              <li>Cinematography</li>
+              <li>Lighting & Audio Basics</li>
+              <li>Creative Direction</li>
+              <li>Team Collaboration</li>
+            </ul>
+
+            <h3>Experience Snapshot</h3>
+            <div class="timeline-item">
+              <h4>Media Production Projects</h4>
+              <p class="muted">Student / Independent Projects · 2023–Present</p>
+              <p>Produced and edited narrative, educational, and collaborative video projects with end-to-end workflow ownership.</p>
+            </div>
+            <div class="timeline-item">
+              <h4>Collaborative Crew Roles</h4>
+              <p class="muted">Creative Teams · Ongoing</p>
+              <p>Supported productions as camera operator, assistant director, and editor in team-based environments.</p>
+            </div>
+          </article>
+
+          <aside class="resume-panel">
+            <h2>Embedded PDF (Drop-in Ready)</h2>
+            <p>
+              Place your file at <code>assets/resume/derek-hansen-resume.pdf</code>. Replace it anytime with the same
+              filename to instantly update this page.
+            </p>
+            <div class="pdf-frame-wrap">
+              <iframe
+                title="Derek Hansen Resume PDF"
+                src="assets/resume/derek-hansen-resume.pdf"
+                class="pdf-frame"
+              ></iframe>
+            </div>
+            <p class="muted">
+              If the PDF is missing, the frame may appear blank. Add the file path above and refresh.
+            </p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>© <span id="year"></span> Derek Hansen. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="index.html">About</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+          <a href="resume.html">Resume</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/portfolio-data.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

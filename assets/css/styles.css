@@ -436,3 +436,62 @@ textarea:focus {
     display: block;
   }
 }
+
+.site-nav a.is-current {
+  color: var(--text);
+  border-bottom: 2px solid rgba(64, 215, 230, 0.7);
+  padding-bottom: 0.2rem;
+}
+
+.page-hero {
+  padding-top: 5.6rem;
+}
+
+.compact-hero {
+  padding-bottom: 2.4rem;
+}
+
+.resume-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1rem;
+}
+
+.resume-panel {
+  background: linear-gradient(180deg, rgba(20, 27, 35, 0.95), rgba(16, 22, 29, 0.95));
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+
+.timeline-item {
+  border-top: 1px solid rgba(64, 215, 230, 0.15);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.timeline-item h4 {
+  margin: 0;
+  font-family: Manrope, Inter, sans-serif;
+}
+
+.pdf-frame-wrap {
+  margin-top: 0.8rem;
+  border: 1px solid #2c3a4c;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  background: #0c1218;
+}
+
+.pdf-frame {
+  width: 100%;
+  min-height: 540px;
+  border: 0;
+}
+
+@media (max-width: 860px) {
+  .resume-grid {
+    grid-template-columns: 1fr;
+  }
+}

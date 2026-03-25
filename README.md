@@ -1,36 +1,45 @@
-# Derek Hansen Portfolio (v1)
+# Derek Hansen Portfolio (v2)
 
-A clean, cinematic, dark-themed personal portfolio website for **Derek Hansen**. This first version is employer-facing, responsive, and easy to self-host on a single machine with no database required.
+A clean, cinematic, dark-themed **four-page** personal portfolio website for **Derek Hansen**. This version is employer-facing, responsive, and easy to self-host on a single machine with no database required.
 
 ## Why this stack
 
 ### Chosen stack
-- **HTML5** for semantic structure and accessibility
-- **CSS3** for custom dark theme styling and responsive layout
-- **Vanilla JavaScript** for lightweight interactivity (portfolio rendering/filtering, mobile nav, subtle animations)
+- **HTML5** for semantic page structure
+- **CSS3** for custom dark theme and responsive UI
+- **Vanilla JavaScript** for lightweight interactions (portfolio filtering, mobile nav, reveal animations)
 
 ### Why it fits this project
-- Fast to deploy on almost any server (Nginx, Apache, Caddy, static hosting, or simple Node static server)
-- Minimal maintenance overhead for v1
-- Easy to customize later without framework lock-in
-- Works immediately with no database, no build step, and no API dependencies
+- Fast static deployment on nearly any server
+- No framework complexity for v1/v2 portfolio needs
+- Easy to maintain and expand later
+- Runs immediately without a database or build step
+
+## Site pages
+
+1. **About** (`index.html`) – professional bio, profile image placeholder, specialties
+2. **Portfolio** (`portfolio.html`) – filterable project cards driven by a data file
+3. **Contact** (`contact.html`) – contact links + optional static-ready form
+4. **Resume** (`resume.html`) – stylized resume overview + embedded/drop-in PDF support
 
 ## Features included
 
-- Sticky top navigation with smooth scrolling
-- Hero section with professional tagline
-- About section with headshot placeholder, intro, career-focused bio, and specialties
-- Portfolio grid with category filtering
-- Contact section with placeholder professional links
-- Optional lightweight front-end-only contact form (easy to connect/disable)
-- Responsive design for desktop, tablet, and mobile
-- Subtle reveal/hover animations for polish
+- Sticky top navigation across all pages
+- Dark cinematic theme with cyan/orange accents
+- Reusable shared layout and footer
+- Portfolio card filtering by category
+- Optional front-end-only contact form handler
+- Resume page with drop-in PDF integration path
+- Responsive design for desktop/tablet/mobile
 
 ## Recommended file structure
 
 ```text
 Portfolio_DerekHansen/
 ├── index.html
+├── portfolio.html
+├── contact.html
+├── resume.html
 ├── README.md
 └── assets/
     ├── css/
@@ -38,19 +47,21 @@ Portfolio_DerekHansen/
     ├── js/
     │   ├── main.js
     │   └── portfolio-data.js
-    └── images/
-        ├── derek-placeholder.svg
-        ├── project-narrative.svg
-        ├── project-corporate.svg
-        ├── project-tech.svg
-        ├── project-educational.svg
-        ├── project-collab.svg
-        └── project-collab-2.svg
+    ├── images/
+    │   ├── derek-placeholder.svg
+    │   ├── project-narrative.svg
+    │   ├── project-corporate.svg
+    │   ├── project-tech.svg
+    │   ├── project-educational.svg
+    │   ├── project-collab.svg
+    │   └── project-collab-2.svg
+    └── resume/
+        └── derek-hansen-resume.pdf  (add this file)
 ```
 
 ## Run locally
 
-No build or install is required.
+No build/install required.
 
 ### Option 1: Python static server
 ```bash
@@ -58,18 +69,17 @@ python3 -m http.server 8080
 ```
 Open: `http://localhost:8080`
 
-### Option 2: Node static server (if preferred)
+### Option 2: Node static server
 ```bash
 npx serve .
 ```
 
 ## Self-hosting on a single machine
 
-### Basic approach
-1. Copy the project folder to your server (e.g., `/var/www/derek-portfolio`).
-2. Serve the directory with a web server (Nginx/Caddy/Apache) as static files.
-3. (Optional) Put behind a reverse proxy and domain with TLS.
-4. (Optional) Use port forwarding from your router to the server.
+1. Upload project to server (example: `/var/www/derek-portfolio`).
+2. Serve directory as static files via Nginx/Caddy/Apache.
+3. Optionally put behind reverse proxy + TLS.
+4. Optionally configure router port forwarding.
 
 ### Nginx example
 ```nginx
@@ -88,12 +98,12 @@ server {
 
 ## Where to edit content
 
-### About + contact text
-- Edit directly in `index.html`.
+### About/contact/resume text
+- Edit directly in `index.html`, `contact.html`, and `resume.html`.
 
-### Portfolio entries (main content expansion point)
-- Edit: `assets/js/portfolio-data.js`
-- Each project item supports:
+### Portfolio entries (primary expansion point)
+- Edit `assets/js/portfolio-data.js`.
+- Fields per entry:
   - `title`
   - `category`
   - `image`
@@ -101,21 +111,16 @@ server {
   - `roles` (optional)
   - `link` (optional)
 
-### Styling and theme
-- Edit colors, spacing, and typography in `assets/css/styles.css` under `:root` and relevant section styles.
+### Theme + layout
+- Edit `assets/css/styles.css`.
 
-## Optional contact form integration
+## Resume PDF drop-in workflow
 
-Current form behavior is static-only (no backend). To enable real submissions later:
-- Connect the form in `index.html` to services like Formspree/Netlify Forms, or
-- Add your own endpoint and update `assets/js/main.js` submit handler.
+To update Derek’s resume regularly:
+1. Export a new PDF.
+2. Save it as `assets/resume/derek-hansen-resume.pdf`.
+3. Replace the old file using the same name.
+4. Refresh `resume.html`.
 
-If you prefer no form in v1, remove or comment out the `<form>` block in the Contact section.
-
-## Next-step ideas
-- Add real headshot and project thumbnails
-- Replace placeholder links with live work (Vimeo/YouTube/project pages)
-- Add dedicated project detail pages
-- Add resume download link
-- Add analytics and SEO metadata tuning
+No additional code changes are required.
 
