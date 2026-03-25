@@ -84,6 +84,7 @@
   function renderCards(filter = 'all') {
     if (!grid) return;
 
+    const showDescription = filter !== 'all';
     const filtered =
       filter === 'all' ? portfolioItems : portfolioItems.filter((item) => item.category.toLowerCase() === filter.toLowerCase());
 
@@ -97,7 +98,7 @@
                 <p class="category-tag">${item.category}</p>
                 <h3>${item.title}</h3>
               </div>
-              <p>${item.description}</p>
+              ${showDescription ? `<p>${item.description}</p>` : ''}
               ${item.roles ? `<p class="roles"><strong>Role:</strong> ${item.roles}</p>` : ''}
               ${item.link ? `<a href="${item.link}" target="_blank" rel="noreferrer" class="card-link">View project</a>` : '<p class="muted">Link coming soon</p>'}
             </div>
