@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Derek Hansen | Filmmaker portfolio featuring narrative, corporate, educational, and collaborative media projects."
+    />
+    <title>Derek Hansen | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="container nav-wrap">
+        <a href="#top" class="brand" aria-label="Derek Hansen home">Derek Hansen</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+        <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+          <a href="#about">About</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section-divider">
+        <div class="container hero-content reveal">
+          <p class="eyebrow">Filmmaker & Media Professional</p>
+          <h1>Cinematic storytelling with purpose, collaboration, and craft.</h1>
+          <p class="hero-copy">
+            I’m Derek Hansen, an emerging filmmaker building impactful visual work across narrative, educational,
+            technical, and collaborative projects.
+          </p>
+          <div class="hero-actions">
+            <a href="#portfolio" class="btn btn-primary">View Work</a>
+            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about section-divider">
+        <div class="container reveal">
+          <div class="section-heading">
+            <p class="eyebrow">About</p>
+            <h2>Building a career in filmmaking and meaningful visual storytelling.</h2>
+          </div>
+
+          <div class="about-grid">
+            <figure class="profile-card">
+              <img src="assets/images/derek-placeholder.svg" alt="Placeholder profile image for Derek Hansen" />
+              <figcaption>Headshot placeholder (replace with a professional portrait).</figcaption>
+            </figure>
+
+            <div class="about-content">
+              <p>
+                Derek Hansen is pursuing a career in filmmaking with a focus on stories that connect with people and
+                communicate clearly. His approach combines visual style, practical production discipline, and a
+                collaborative mindset.
+              </p>
+              <p>
+                His growing portfolio includes creative narrative pieces, educational media, and team-based production
+                work. Derek is especially interested in projects where strong storytelling can support real-world goals,
+                from brand communication to learning experiences and community-focused media.
+              </p>
+
+              <div class="skills-block">
+                <h3>Specialties</h3>
+                <ul class="skills-list">
+                  <li>Cinematic Editing</li>
+                  <li>Story Development</li>
+                  <li>Production Coordination</li>
+                  <li>Interview & Documentary Style</li>
+                  <li>Collaborative Creative Workflow</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" class="portfolio section-divider">
+        <div class="container reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Portfolio</p>
+            <h2>Selected work across narrative, educational, and collaborative media.</h2>
+          </div>
+
+          <div class="filter-bar" role="toolbar" aria-label="Portfolio filters">
+            <button class="filter-btn is-active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Narrative">Narrative</button>
+            <button class="filter-btn" data-filter="Corporate">Corporate</button>
+            <button class="filter-btn" data-filter="Tech Preview">Tech Preview</button>
+            <button class="filter-btn" data-filter="Educational">Educational</button>
+            <button class="filter-btn" data-filter="Collaborative">Collaborative</button>
+          </div>
+
+          <div id="portfolio-grid" class="portfolio-grid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact section-divider">
+        <div class="container reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Contact</p>
+            <h2>Let’s connect for opportunities and creative collaboration.</h2>
+          </div>
+
+          <div class="contact-layout">
+            <div class="contact-cards">
+              <a href="mailto:derek.hansen@example.com" class="contact-card">
+                <h3>Email</h3>
+                <p>derek.hansen@example.com</p>
+              </a>
+              <a href="https://github.com/your-github" target="_blank" rel="noreferrer" class="contact-card">
+                <h3>GitHub</h3>
+                <p>github.com/your-github</p>
+              </a>
+              <a href="https://www.linkedin.com/in/your-linkedin" target="_blank" rel="noreferrer" class="contact-card">
+                <h3>LinkedIn</h3>
+                <p>linkedin.com/in/your-linkedin</p>
+              </a>
+              <a href="#" class="contact-card" aria-disabled="true">
+                <h3>Resume</h3>
+                <p>Add a resume link when ready</p>
+              </a>
+            </div>
+
+            <form class="contact-form" id="contact-form" novalidate>
+              <h3>Message (Optional static form)</h3>
+              <p>
+                This lightweight form is front-end only for now. Connect it later to Formspree, Netlify Forms, or your
+                own endpoint.
+              </p>
+
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" />
+
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" />
+
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="Tell me about your project or opportunity."></textarea>
+
+              <button type="submit" class="btn btn-primary">Send Message</button>
+              <p id="form-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>© <span id="year"></span> Derek Hansen. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/portfolio-data.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
