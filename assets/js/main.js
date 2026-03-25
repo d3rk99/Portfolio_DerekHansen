@@ -7,6 +7,74 @@
   const contactForm = document.getElementById('contact-form');
   const feedback = document.getElementById('form-feedback');
 
+  function getYouTubeEmbedUrl(url) {
+    if (!url) return '';
+
+    try {
+      const parsed = new URL(url);
+      const host = parsed.hostname.replace('www.', '');
+
+      if (host === 'youtu.be') {
+        const id = parsed.pathname.slice(1);
+        return id ? `https://www.youtube.com/embed/${id}` : '';
+      }
+
+      if (host === 'youtube.com' || host === 'm.youtube.com') {
+        if (parsed.pathname === '/watch') {
+          const id = parsed.searchParams.get('v');
+          return id ? `https://www.youtube.com/embed/${id}` : '';
+        }
+
+        if (parsed.pathname.startsWith('/embed/')) {
+          return url;
+        }
+      }
+    } catch (_error) {
+      return '';
+    }
+
+    return '';
+  }
+
+  function renderProjectMedia(item) {
+    if (item.media?.type === 'youtube' && item.media.url) {
+      const embedUrl = getYouTubeEmbedUrl(item.media.url);
+
+      if (embedUrl) {
+        return `
+          <div class="card-media media-frame">
+            <iframe
+              src="${embedUrl}"
+              title="${item.title} video preview"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        `;
+      }
+    }
+
+    if (item.media?.type === 'video' && item.media.src) {
+      const posterAttr = item.media.poster ? `poster="${item.media.poster}"` : '';
+      return `
+        <div class="card-media media-frame">
+          <video controls preload="metadata" ${posterAttr}>
+            <source src="${item.media.src}" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      `;
+    }
+
+    if (item.image) {
+      return `<img class="card-media" src="${item.image}" alt="${item.title} thumbnail" loading="lazy" />`;
+    }
+
+    return '';
+  }
+
   function renderCards(filter = 'all') {
     if (!grid) return;
 
@@ -17,7 +85,7 @@
       .map(
         (item) => `
           <article class="portfolio-card">
-            <img src="${item.image}" alt="${item.title} thumbnail" loading="lazy" />
+            ${renderProjectMedia(item)}
             <div class="card-content">
               <div class="card-top">
                 <p class="category-tag">${item.category}</p>

@@ -1,9 +1,21 @@
 // Edit this array to add, remove, or update portfolio projects.
 // Each object maps directly to one card in the Portfolio section.
+//
+// Media options:
+// 1) YouTube embed:
+//    media: { type: 'youtube', url: 'https://www.youtube.com/watch?v=VIDEO_ID' }
+// 2) Self-hosted video:
+//    media: { type: 'video', src: 'assets/videos/your-video.mp4', poster: 'assets/images/your-poster.jpg' }
+// 3) Static image fallback (default):
+//    image: 'assets/images/project-image.svg'
 window.portfolioItems = [
   {
     title: 'Fractured Light',
     category: 'Narrative',
+    media: {
+      type: 'youtube',
+      url: 'https://www.youtube.com/watch?v=jNQXAC9IVRw'
+    },
     image: 'assets/images/project-narrative.svg',
     description: 'A short narrative piece exploring memory and place through natural light and minimal dialogue.',
     roles: 'Director, Editor',
@@ -20,6 +32,11 @@ window.portfolioItems = [
   {
     title: 'Realtime SetViz Demo',
     category: 'Tech Preview',
+    media: {
+      type: 'video',
+      src: 'assets/videos/realtime-setviz-demo.mp4',
+      poster: 'assets/images/project-tech.svg'
+    },
     image: 'assets/images/project-tech.svg',
     description: 'Preview content demonstrating an experimental virtual-production workflow for previsualization.',
     roles: 'Editor, Motion Graphics',
