@@ -10,7 +10,7 @@
 //    image: 'assets/images/project-image.svg'
 window.portfolioItems = [
   {
-    title: 'Fractured Light',
+    title: 'Say Something',
     category: 'Narrative',
     media: {
       type: 'video',
@@ -18,8 +18,9 @@ window.portfolioItems = [
       poster: 'assets/images/project-narrative.svg'
     },
     image: 'assets/images/project-narrative.svg',
-    description: 'A short narrative piece exploring memory and place through natural light and minimal dialogue.',
-    roles: 'Director, Editor',
+    description:
+      'A narrative-driven student project, this cinematic interpretation of “Say Something” explores a dystopian tone shaped by guilt, memory, and emotional distance. The story unfolds through visual language rather than dialogue, relying on composition, movement, and timing to carry the narrative without heavy exposition. I led production as a solo producer from concept through final edit, including directing, cinematography, and post-production, while coordinating with professional actors and maintaining a clear creative vision. Though heavily planned in pre-production, execution followed a guerrilla-style approach that used natural light, time of day, and weather conditions to preserve visual consistency and tone. The result balances intentional design with on-the-fly problem solving, demonstrating creative direction and technical adaptability in a constrained production environment.',
+    roles: 'Solo Producer, Director, Cinematographer, Post-Production',
     link: 'https://example.com/narrative-project'
   },
   {
