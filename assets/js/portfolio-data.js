@@ -39,6 +39,24 @@ window.portfolioItems = [
     link: 'https://www.youtube.com/watch?v=8rfQEQvvLII&t=97s'
   },
   {
+    title: 'Feed the Streets',
+    category: 'Narrative',
+    image: 'assets/images/project-narrative.svg',
+    description:
+      'One of my favorite projects, this narrative piece started as the brainchild of a young student, Mathew Pryor. A lot of planning and organization went into the production, and I served as the main producer by securing locations and coordinating schedules for crew and talent. I also co-wrote the project alongside Matthew and supported sound and post-production. The experience reinforced how important a strong crew can be. Even with mostly non-professional collaborators, the project showed what is possible with the right mix of talent, trust, and delegation.',
+    roles: 'Writer, Producer, Sound, Editor',
+    link: ''
+  },
+  {
+    title: 'Mock (Netflix commercial)',
+    category: 'Educational',
+    image: 'assets/images/project-educational.svg',
+    description:
+      'This was one of my earliest class assignments in a video production course. We were tasked with creating a 30-second commercial for a real company, and our team chose Netflix because their ad format in 2016 was simple and easy to model for a school project. It was a fun production experience and a strong early exercise in short-form storytelling and editing. This piece was created strictly for educational purposes and has no association with Netflix.',
+    roles: 'Writing, Producer, Editor',
+    link: ''
+  },
+  {
     title: 'Northline Brand Story',
     category: 'Corporate',
     image: 'assets/images/project-corporate.svg',
