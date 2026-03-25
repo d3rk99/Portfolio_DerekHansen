@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Contact Derek Hansen for filmmaking opportunities, project collaboration, and professional inquiries."
+    />
+    <title>Derek Hansen | Contact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body data-page="contact">
+    <header class="site-header" id="top">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand" aria-label="Derek Hansen home">Derek Hansen</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+        <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+          <a href="index.html" data-nav="about">About</a>
+          <a href="portfolio.html" data-nav="portfolio">Portfolio</a>
+          <a href="contact.html" data-nav="contact">Contact</a>
+          <a href="resume.html" data-nav="resume">Resume</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section-divider page-hero compact-hero">
+        <div class="container hero-content reveal">
+          <p class="eyebrow">Contact</p>
+          <h1>Open to opportunities, collaboration, and conversation.</h1>
+          <p class="hero-copy">
+            Reach out directly for production opportunities, freelance projects, or team-based creative work.
+          </p>
+        </div>
+      </section>
+
+      <section class="contact section-divider">
+        <div class="container reveal">
+          <div class="contact-layout">
+            <div class="contact-cards">
+              <a href="mailto:derek.hansen@example.com" class="contact-card">
+                <h3>Email</h3>
+                <p>derek.hansen@example.com</p>
+              </a>
+              <a href="https://github.com/your-github" target="_blank" rel="noreferrer" class="contact-card">
+                <h3>GitHub</h3>
+                <p>github.com/your-github</p>
+              </a>
+              <a href="https://www.linkedin.com/in/your-linkedin" target="_blank" rel="noreferrer" class="contact-card">
+                <h3>LinkedIn</h3>
+                <p>linkedin.com/in/your-linkedin</p>
+              </a>
+              <a href="resume.html" class="contact-card">
+                <h3>Resume</h3>
+                <p>View Derek's latest resume page</p>
+              </a>
+            </div>
+
+            <form class="contact-form" id="contact-form" novalidate>
+              <h3>Message (Optional static form)</h3>
+              <p>
+                This lightweight form is front-end only for now. Connect it later to Formspree, Netlify Forms, or your
+                own endpoint.
+              </p>
+
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" />
+
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" />
+
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="Tell me about your project or opportunity."></textarea>
+
+              <button type="submit" class="btn btn-primary">Send Message</button>
+              <p id="form-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>© <span id="year"></span> Derek Hansen. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="index.html">About</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+          <a href="resume.html">Resume</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/portfolio-data.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
