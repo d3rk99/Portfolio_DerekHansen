@@ -20,23 +20,23 @@ window.portfolioItems = [
     image: 'assets/images/project-narrative.svg',
     description:
       'A narrative-driven student project, this cinematic interpretation of “Say Something” explores a dystopian tone shaped by guilt, memory, and emotional distance. The story unfolds through visual language rather than dialogue, relying on composition, movement, and timing to carry the narrative without heavy exposition. I led production as a solo producer from concept through final edit, including directing, cinematography, and post-production, while coordinating with professional actors and maintaining a clear creative vision. Though heavily planned in pre-production, execution followed a guerrilla-style approach that used natural light, time of day, and weather conditions to preserve visual consistency and tone. The result balances intentional design with on-the-fly problem solving, demonstrating creative direction and technical adaptability in a constrained production environment.',
-    roles: 'Solo Producer, Director, Cinematographer, Post-Production',
-    link: 'https://example.com/narrative-project'
+    roles: 'Writer, Producer, Director, Cinematographer, Editor',
+    link: 'https://www.youtube.com/watch?v=qrTbU_Yn6QM'
   },
 
   {
     title: 'Idaho State University Public Safety',
-    category: 'Educational',
+    category: 'Corporate',
     media: {
       type: 'video',
-      src: 'assets/Videos/Need Help? Just ask.mp4',
+      src: 'assets/Videos/need-help-just-ask-1080-ytshorts.savetube.me.mp4',
       poster: 'assets/images/project-educational.svg'
     },
     image: 'assets/images/project-educational.svg',
     description:
       'This project was produced as contracted work for the Idaho State University Public Safety Department. The department wanted an updated orientation video for new students because their previous version felt dated and lacked quality. After I reached out and met with their team, I moved into full production. Without personal camera equipment, I coordinated gear through the university\'s communications department and built the production around available resources. The process was extremely rewarding and included challenges in interview organization, narrative structure, and subtle CGI integration. The final piece was very well received by the department, and they later offered me an in-house role as production and content creation manager, which I ultimately declined.',
     roles: 'Writer, Producer, Director, Editor',
-    link: ''
+    link: 'https://www.youtube.com/watch?v=8rfQEQvvLII&t=97s'
   },
   {
     title: 'Northline Brand Story',
