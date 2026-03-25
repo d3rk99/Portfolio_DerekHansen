@@ -14,7 +14,7 @@ window.portfolioItems = [
     category: 'Narrative',
     media: {
       type: 'youtube',
-      url: 'https://www.youtube-nocookie.com/embed/qrTbU_Yn6QM?si=kElQLsTNaHIIjj7x'
+      url: 'https://www.youtube-nocookie.com/embed/qrTbU_Yn6QM?si=OND_IGA0yMWVEJBm'
     },
     image: 'assets/images/project-narrative.svg',
     description: 'A short narrative piece exploring memory and place through natural light and minimal dialogue.',
