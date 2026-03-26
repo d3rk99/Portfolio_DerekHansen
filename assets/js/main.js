@@ -1,11 +1,57 @@
 (function () {
   const portfolioItems = window.portfolioItems || [];
   const grid = document.getElementById('portfolio-grid');
-  const filterButtons = document.querySelectorAll('.filter-btn');
+  const filterBar = document.querySelector('.filter-bar');
   const navToggle = document.querySelector('.nav-toggle');
   const siteNav = document.getElementById('site-nav');
   const contactForm = document.getElementById('contact-form');
   const feedback = document.getElementById('form-feedback');
+
+  function normalizeTags(item) {
+    if (Array.isArray(item.tags) && item.tags.length > 0) {
+      return item.tags;
+    }
+
+    if (item.category) {
+      return [item.category];
+    }
+
+    return [];
+  }
+
+  function getFilterList(items) {
+    const discoveredTags = new Set();
+
+    items.forEach((item) => {
+      normalizeTags(item).forEach((tag) => discoveredTags.add(tag));
+    });
+
+    return ['all', ...Array.from(discoveredTags)];
+  }
+
+  function renderFilterButtons() {
+    if (!filterBar) return;
+
+    const filters = getFilterList(portfolioItems);
+
+    filterBar.innerHTML = filters
+      .map(
+        (filter, index) => `
+          <button class="filter-btn ${index === 0 ? 'is-active' : ''}" data-filter="${filter}">
+            ${filter === 'all' ? 'All' : filter}
+          </button>
+        `
+      )
+      .join('');
+  }
+
+  function renderTags(item) {
+    const tags = normalizeTags(item);
+
+    return tags
+      .map((tag) => `<p class="category-tag">${tag}</p>`)
+      .join('');
+  }
 
   function getYouTubeEmbedUrl(url) {
     if (!url) return '';
@@ -85,8 +131,11 @@
     if (!grid) return;
 
     const showDescription = filter !== 'all';
+    const activeFilter = filter.toLowerCase();
     const filtered =
-      filter === 'all' ? portfolioItems : portfolioItems.filter((item) => item.category.toLowerCase() === filter.toLowerCase());
+      activeFilter === 'all'
+        ? portfolioItems
+        : portfolioItems.filter((item) => normalizeTags(item).some((tag) => tag.toLowerCase() === activeFilter));
 
     grid.innerHTML = filtered
       .map(
@@ -95,7 +144,7 @@
             ${renderProjectMedia(item)}
             <div class="card-content">
               <div class="card-top">
-                <p class="category-tag">${item.category}</p>
+                <div class="category-tags">${renderTags(item)}</div>
                 <h3>${item.title}</h3>
               </div>
               ${showDescription ? `<p>${item.description}</p>` : ''}
@@ -108,12 +157,13 @@
       .join('');
   }
 
-  filterButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      filterButtons.forEach((btn) => btn.classList.remove('is-active'));
-      button.classList.add('is-active');
-      renderCards(button.dataset.filter);
-    });
+  filterBar?.addEventListener('click', (event) => {
+    const button = event.target.closest('.filter-btn');
+    if (!button) return;
+
+    filterBar.querySelectorAll('.filter-btn').forEach((btn) => btn.classList.remove('is-active'));
+    button.classList.add('is-active');
+    renderCards(button.dataset.filter || 'all');
   });
 
   // Mobile nav toggle.
@@ -166,5 +216,6 @@
     yearEl.textContent = new Date().getFullYear();
   }
 
+  renderFilterButtons();
   renderCards();
 })();

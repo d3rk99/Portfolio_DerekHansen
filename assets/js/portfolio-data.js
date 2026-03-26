@@ -11,7 +11,7 @@
 window.portfolioItems = [
   {
     title: 'Say Something',
-    category: 'Narrative',
+    tags: ['Narrative'],
     media: {
       type: 'video',
       src: 'assets/Videos/say-something-student-music-video-derek-hansen-2160-ytshorts.savetube.me.mp4',
@@ -26,7 +26,7 @@ window.portfolioItems = [
 
   {
     title: 'Idaho State University Public Safety',
-    category: 'Corporate',
+    tags: ['Corporate', 'Educational'],
     media: {
       type: 'video',
       src: 'assets/Videos/need-help-just-ask-1080-ytshorts.savetube.me.mp4',
@@ -40,7 +40,7 @@ window.portfolioItems = [
   },
   {
     title: 'Feed the Streets',
-    category: 'Narrative',
+    tags: ['Narrative', 'Collaborative'],
 	media: {
       type: 'video',
       src: 'assets/Videos/GDDRnRlcBA67SB0FAP-QPsOWqTgDbmdjAAAF.mp4',
@@ -54,7 +54,7 @@ window.portfolioItems = [
   },
   {
     title: '(Mock) Netflix commercial',
-    category: 'Educational',
+    tags: ['Educational', 'Collaborative'],
 	media: {
       type: 'video',
       src: 'assets/Videos/mock-netflix-commercial-1080-ytshorts.savetube.me.mp4',
@@ -68,7 +68,7 @@ window.portfolioItems = [
   },
   {
     title: 'Memento Mori',
-    category: 'Narrative',
+    tags: ['Narrative', 'Corporate', 'Machine'],
 	media: {
       type: 'video',
       src: 'assets/Videos/memento-mori-season-6-promo-1080-ytshorts.savetube.me.mp4',
@@ -81,7 +81,7 @@ window.portfolioItems = [
   },
   {
     title: 'Old Man Farlen',
-    category: 'Narrative',
+    tags: ['Narrative', 'Tech Preview', 'Machine'],
     media: {
       type: 'video',
       src: 'assets/videos/Old Man Farlen - Phillip Schoen (1080p, h264, youtube).mp4',
@@ -94,7 +94,7 @@ window.portfolioItems = [
   },
   {
     title: 'STEM Lab Learning Series',
-    category: 'Educational',
+    tags: ['Educational'],
     image: 'assets/images/project-educational.svg',
     description: 'Episode-based educational media designed to simplify technical topics for student audiences.',
     roles: 'Producer, Script Support',
@@ -102,7 +102,7 @@ window.portfolioItems = [
   },
   {
     title: 'Community Voices Documentary',
-    category: 'Collaborative',
+    tags: ['Collaborative', 'Narrative'],
     image: 'assets/images/project-collab.svg',
     description: 'A team-produced documentary short focused on local stories and grassroots creative initiatives.',
     roles: 'Assistant Director, Editor',
@@ -110,7 +110,7 @@ window.portfolioItems = [
   },
   {
     title: 'Campus Event Highlight Reel',
-    category: 'Collaborative',
+    tags: ['Collaborative', 'Corporate'],
     image: 'assets/images/project-collab-2.svg',
     description: 'Fast-turn social and event recap content produced with a student media crew.',
     roles: 'Camera Operator, Editor',
