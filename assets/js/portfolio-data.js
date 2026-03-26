@@ -88,8 +88,21 @@ window.portfolioItems = [
       poster: 'assets/Videos/OldManFarlen.png'
     },
     image: 'assets/Videos/OldManFarlen.png',
-    description: 'Preview content demonstrating an experimental virtual-production workflow for previsualization.',
+    description: 'This horror short was produced during my senior year of high school in 2012 and marked my first attempt at a longer-form narrative project. Created as part of my role in student council, where I was responsible for producing school media, the piece was developed as our annual Halloween video. Previous years had leaned toward lighthearted, comedic content, but I set out to take a more cinematic approach—writing, shooting, and editing a darker, narrative-driven short that still carried elements of humor. The project gave me early experience in structuring a longer story, managing production from start to finish, and experimenting with tone and audience expectations. After its screening to the entire school, the video received an unexpected reaction from administration, who felt it was too graphic and intense for the setting. While I viewed the piece as a playful step into horror storytelling, the response highlighted the impact of tone, audience perception, and creative risk. Looking back, this project represents an important turning point in my development as a filmmaker—my first real exploration of narrative structure, creative direction, and the balance between artistic intent and audience reception.',
     roles: 'Writer, Producer, Director',
+    link: 'https://www.youtube.com/watch?v=4nZUNvA2Z9o'
+  },
+  {
+    title: '3D Reflection Test',
+    tags: ['Tech Preview'],
+    media: {
+      type: 'video',
+      src: 'assets/videos/YTDown.com_YouTube_MiniCar-Moddle-Test_Media_CEeKiE7FEkQ_001_1080p.mp4',
+      poster: 'assets/Videos/3Dcars.png'
+    },
+    image: 'assets/Videos/3Dcars.png',
+    description: 'Preview content demonstrating an experimental virtual-production workflow for previsualization.',
+    roles: '',
     link: 'https://www.youtube.com/watch?v=4nZUNvA2Z9o'
   }
 ];
