@@ -14,6 +14,8 @@
   const modalDescription = modalRoot?.querySelector('[data-modal-description]');
   const modalLink = modalRoot?.querySelector('[data-modal-link]');
   const modalMuted = modalRoot?.querySelector('[data-modal-muted]');
+  const modalBackdrop = modalRoot?.querySelector('.portfolio-modal__backdrop');
+  const modalDialog = modalRoot?.querySelector('.portfolio-modal__dialog');
   let activeFilter = 'all';
 
   function normalizeTags(item) {
@@ -97,8 +99,22 @@
     }
   }
 
-  function renderProjectMedia(item) {
+  function renderProjectMedia(item, options = {}) {
+    const disablePlayback = Boolean(options.disablePlayback);
+
     if (item.media?.type === 'youtube' && item.media.url) {
+      if (disablePlayback) {
+        const previewImage = item.image
+          ? `<img class="card-media" src="${item.image}" alt="${item.title} thumbnail" loading="lazy" />`
+          : '<div class="card-media"></div>';
+        return `
+          <div class="card-media media-frame media-preview">
+            ${previewImage}
+            <span class="media-preview-note">Click to expand</span>
+          </div>
+        `;
+      }
+
       const embedUrl = getYouTubeEmbedUrl(item.media.url);
 
       if (embedUrl) {
@@ -119,12 +135,16 @@
 
     if (item.media?.type === 'video' && item.media.src) {
       const posterAttr = item.media.poster ? `poster="${item.media.poster}"` : '';
+      const controlsAttr = disablePlayback ? '' : 'controls';
+      const previewAttr = disablePlayback ? 'tabindex="-1" aria-hidden="true"' : '';
+      const previewClass = disablePlayback ? 'media-preview' : '';
       return `
-        <div class="card-media media-frame">
-          <video controls preload="metadata" ${posterAttr}>
+        <div class="card-media media-frame ${previewClass}">
+          <video ${controlsAttr} preload="metadata" ${posterAttr} ${previewAttr}>
             <source src="${item.media.src}" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+          ${disablePlayback ? '<span class="media-preview-note">Click to expand</span>' : ''}
         </div>
       `;
     }
@@ -153,7 +173,7 @@
       .map(
         (item) => `
           <article class="portfolio-card ${isAllView ? 'is-expandable' : ''}" data-item-index="${portfolioItems.indexOf(item)}">
-            ${renderProjectMedia(item)}
+            ${renderProjectMedia(item, { disablePlayback: isAllView })}
             <div class="card-content">
               <div class="card-top">
                 <div class="category-tags">${renderTags(item)}</div>
@@ -169,7 +189,7 @@
       .join('');
   }
 
-  function openPortfolioModal(item) {
+  function openPortfolioModal(item, sourceCard) {
     if (!modalRoot || !modalMedia || !modalTitle || !modalRoles || !modalDescription || !modalTags) return;
 
     modalMedia.innerHTML = renderProjectMedia(item);
@@ -191,6 +211,31 @@
 
     modalRoot.hidden = false;
     document.body.classList.add('modal-open');
+
+    if (modalDialog && sourceCard) {
+      const sourceRect = sourceCard.getBoundingClientRect();
+      const dialogRect = modalDialog.getBoundingClientRect();
+      const translateX = sourceRect.left + sourceRect.width / 2 - (dialogRect.left + dialogRect.width / 2);
+      const translateY = sourceRect.top + sourceRect.height / 2 - (dialogRect.top + dialogRect.height / 2);
+      const scaleX = Math.max(sourceRect.width / dialogRect.width, 0.2);
+      const scaleY = Math.max(sourceRect.height / dialogRect.height, 0.2);
+
+      modalDialog.animate(
+        [
+          {
+            transform: `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`,
+            opacity: 0.65
+          },
+          { transform: 'translate(0, 0) scale(1, 1)', opacity: 1 }
+        ],
+        { duration: 260, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' }
+      );
+    }
+
+    modalBackdrop?.animate([{ opacity: 0 }, { opacity: 1 }], {
+      duration: 220,
+      easing: 'ease-out'
+    });
   }
 
   function closePortfolioModal() {
@@ -214,7 +259,7 @@
   grid?.addEventListener('click', (event) => {
     if (activeFilter !== 'all') return;
 
-    const interactiveTarget = event.target.closest('a, button, iframe, video');
+    const interactiveTarget = event.target.closest('a, button');
     if (interactiveTarget) return;
 
     const card = event.target.closest('.portfolio-card.is-expandable');
@@ -226,7 +271,7 @@
     const item = portfolioItems[itemIndex];
     if (!item) return;
 
-    openPortfolioModal(item);
+    openPortfolioModal(item, card);
   });
 
   modalRoot?.addEventListener('click', (event) => {

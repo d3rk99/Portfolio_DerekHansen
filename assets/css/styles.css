@@ -309,6 +309,24 @@ section {
   object-fit: cover;
 }
 
+.media-preview video,
+.media-preview iframe {
+  pointer-events: none;
+}
+
+.media-preview-note {
+  position: absolute;
+  right: 0.55rem;
+  bottom: 0.55rem;
+  color: #e9f9fb;
+  font-size: 0.76rem;
+  font-weight: 600;
+  background: rgba(7, 12, 18, 0.8);
+  border: 1px solid rgba(64, 215, 230, 0.38);
+  border-radius: 999px;
+  padding: 0.18rem 0.52rem;
+}
+
 
 .card-top {
   display: grid;
