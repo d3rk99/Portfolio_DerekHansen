@@ -132,6 +132,8 @@
 
     const showDescription = filter !== 'all';
     const activeFilter = filter.toLowerCase();
+    grid.classList.toggle('is-all', activeFilter === 'all');
+
     const filtered =
       activeFilter === 'all'
         ? portfolioItems

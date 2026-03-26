@@ -265,6 +265,11 @@ section {
   gap: 1.1rem;
 }
 
+.portfolio-grid.is-all {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
 .portfolio-card {
   overflow: hidden;
   transition: border-color 0.2s ease, transform 0.2s ease;
@@ -435,6 +440,10 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 
+  .portfolio-grid.is-all {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .site-nav {
     position: absolute;
     top: 72px;
@@ -518,6 +527,12 @@ textarea:focus {
 
 @media (max-width: 860px) {
   .resume-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .portfolio-grid.is-all {
     grid-template-columns: 1fr;
   }
 }
