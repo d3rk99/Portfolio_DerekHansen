@@ -68,7 +68,7 @@ window.portfolioItems = [
   },
   {
     title: 'Memento Mori',
-    tags: ['Narrative', 'Corporate', 'Machine'],
+    tags: ['Narrative', 'Corporate', 'Machinima'],
 	media: {
       type: 'video',
       src: 'assets/Videos/memento-mori-season-6-promo-1080-ytshorts.savetube.me.mp4',
