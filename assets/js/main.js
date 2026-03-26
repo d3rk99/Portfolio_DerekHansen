@@ -6,6 +6,15 @@
   const siteNav = document.getElementById('site-nav');
   const contactForm = document.getElementById('contact-form');
   const feedback = document.getElementById('form-feedback');
+  const modalRoot = document.querySelector('[data-portfolio-modal]');
+  const modalMedia = modalRoot?.querySelector('[data-modal-media]');
+  const modalTags = modalRoot?.querySelector('[data-modal-tags]');
+  const modalTitle = modalRoot?.querySelector('[data-modal-title]');
+  const modalRoles = modalRoot?.querySelector('[data-modal-roles]');
+  const modalDescription = modalRoot?.querySelector('[data-modal-description]');
+  const modalLink = modalRoot?.querySelector('[data-modal-link]');
+  const modalMuted = modalRoot?.querySelector('[data-modal-muted]');
+  let activeFilter = 'all';
 
   function normalizeTags(item) {
     if (Array.isArray(item.tags) && item.tags.length > 0) {
@@ -131,8 +140,9 @@
     if (!grid) return;
 
     const showDescription = filter !== 'all';
-    const activeFilter = filter.toLowerCase();
-    grid.classList.toggle('is-all', activeFilter === 'all');
+    activeFilter = filter.toLowerCase();
+    const isAllView = activeFilter === 'all';
+    grid.classList.toggle('is-all', isAllView);
 
     const filtered =
       activeFilter === 'all'
@@ -142,7 +152,7 @@
     grid.innerHTML = filtered
       .map(
         (item) => `
-          <article class="portfolio-card">
+          <article class="portfolio-card ${isAllView ? 'is-expandable' : ''}" data-item-index="${portfolioItems.indexOf(item)}">
             ${renderProjectMedia(item)}
             <div class="card-content">
               <div class="card-top">
@@ -159,6 +169,39 @@
       .join('');
   }
 
+  function openPortfolioModal(item) {
+    if (!modalRoot || !modalMedia || !modalTitle || !modalRoles || !modalDescription || !modalTags) return;
+
+    modalMedia.innerHTML = renderProjectMedia(item);
+    modalTags.innerHTML = renderTags(item);
+    modalTitle.textContent = item.title;
+    modalRoles.innerHTML = item.roles ? `<strong>Role:</strong> ${item.roles}` : '';
+    modalDescription.textContent = item.description || '';
+
+    if (modalLink && modalMuted) {
+      if (item.link) {
+        modalLink.href = item.link;
+        modalLink.hidden = false;
+        modalMuted.hidden = true;
+      } else {
+        modalLink.hidden = true;
+        modalMuted.hidden = false;
+      }
+    }
+
+    modalRoot.hidden = false;
+    document.body.classList.add('modal-open');
+  }
+
+  function closePortfolioModal() {
+    if (!modalRoot || modalRoot.hidden) return;
+    modalRoot.hidden = true;
+    document.body.classList.remove('modal-open');
+    if (modalMedia) {
+      modalMedia.innerHTML = '';
+    }
+  }
+
   filterBar?.addEventListener('click', (event) => {
     const button = event.target.closest('.filter-btn');
     if (!button) return;
@@ -166,6 +209,36 @@
     filterBar.querySelectorAll('.filter-btn').forEach((btn) => btn.classList.remove('is-active'));
     button.classList.add('is-active');
     renderCards(button.dataset.filter || 'all');
+  });
+
+  grid?.addEventListener('click', (event) => {
+    if (activeFilter !== 'all') return;
+
+    const interactiveTarget = event.target.closest('a, button, iframe, video');
+    if (interactiveTarget) return;
+
+    const card = event.target.closest('.portfolio-card.is-expandable');
+    if (!card) return;
+
+    const itemIndex = Number(card.dataset.itemIndex);
+    if (Number.isNaN(itemIndex)) return;
+
+    const item = portfolioItems[itemIndex];
+    if (!item) return;
+
+    openPortfolioModal(item);
+  });
+
+  modalRoot?.addEventListener('click', (event) => {
+    if (event.target.closest('[data-modal-close]')) {
+      closePortfolioModal();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closePortfolioModal();
+    }
   });
 
   // Mobile nav toggle.
