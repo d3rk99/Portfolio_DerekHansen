@@ -6,6 +6,17 @@
   const siteNav = document.getElementById('site-nav');
   const contactForm = document.getElementById('contact-form');
   const feedback = document.getElementById('form-feedback');
+  const modalRoot = document.querySelector('[data-portfolio-modal]');
+  const modalMedia = modalRoot?.querySelector('[data-modal-media]');
+  const modalTags = modalRoot?.querySelector('[data-modal-tags]');
+  const modalTitle = modalRoot?.querySelector('[data-modal-title]');
+  const modalRoles = modalRoot?.querySelector('[data-modal-roles]');
+  const modalDescription = modalRoot?.querySelector('[data-modal-description]');
+  const modalLink = modalRoot?.querySelector('[data-modal-link]');
+  const modalMuted = modalRoot?.querySelector('[data-modal-muted]');
+  const modalBackdrop = modalRoot?.querySelector('.portfolio-modal__backdrop');
+  const modalDialog = modalRoot?.querySelector('.portfolio-modal__dialog');
+  let activeFilter = 'all';
 
   function normalizeTags(item) {
     if (Array.isArray(item.tags) && item.tags.length > 0) {
@@ -88,8 +99,22 @@
     }
   }
 
-  function renderProjectMedia(item) {
+  function renderProjectMedia(item, options = {}) {
+    const disablePlayback = Boolean(options.disablePlayback);
+
     if (item.media?.type === 'youtube' && item.media.url) {
+      if (disablePlayback) {
+        const previewImage = item.image
+          ? `<img class="card-media" src="${item.image}" alt="${item.title} thumbnail" loading="lazy" />`
+          : '<div class="card-media"></div>';
+        return `
+          <div class="card-media media-frame media-preview">
+            ${previewImage}
+            <span class="media-preview-note">Click to expand</span>
+          </div>
+        `;
+      }
+
       const embedUrl = getYouTubeEmbedUrl(item.media.url);
 
       if (embedUrl) {
@@ -110,12 +135,16 @@
 
     if (item.media?.type === 'video' && item.media.src) {
       const posterAttr = item.media.poster ? `poster="${item.media.poster}"` : '';
+      const controlsAttr = disablePlayback ? '' : 'controls';
+      const previewAttr = disablePlayback ? 'tabindex="-1" aria-hidden="true"' : '';
+      const previewClass = disablePlayback ? 'media-preview' : '';
       return `
-        <div class="card-media media-frame">
-          <video controls preload="metadata" ${posterAttr}>
+        <div class="card-media media-frame ${previewClass}">
+          <video ${controlsAttr} preload="metadata" ${posterAttr} ${previewAttr}>
             <source src="${item.media.src}" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+          ${disablePlayback ? '<span class="media-preview-note">Click to expand</span>' : ''}
         </div>
       `;
     }
@@ -131,8 +160,9 @@
     if (!grid) return;
 
     const showDescription = filter !== 'all';
-    const activeFilter = filter.toLowerCase();
-    grid.classList.toggle('is-all', activeFilter === 'all');
+    activeFilter = filter.toLowerCase();
+    const isAllView = activeFilter === 'all';
+    grid.classList.toggle('is-all', isAllView);
 
     const filtered =
       activeFilter === 'all'
@@ -142,8 +172,8 @@
     grid.innerHTML = filtered
       .map(
         (item) => `
-          <article class="portfolio-card">
-            ${renderProjectMedia(item)}
+          <article class="portfolio-card ${isAllView ? 'is-expandable' : ''}" data-item-index="${portfolioItems.indexOf(item)}">
+            ${renderProjectMedia(item, { disablePlayback: isAllView })}
             <div class="card-content">
               <div class="card-top">
                 <div class="category-tags">${renderTags(item)}</div>
@@ -159,6 +189,64 @@
       .join('');
   }
 
+  function openPortfolioModal(item, sourceCard) {
+    if (!modalRoot || !modalMedia || !modalTitle || !modalRoles || !modalDescription || !modalTags) return;
+
+    modalMedia.innerHTML = renderProjectMedia(item);
+    modalTags.innerHTML = renderTags(item);
+    modalTitle.textContent = item.title;
+    modalRoles.innerHTML = item.roles ? `<strong>Role:</strong> ${item.roles}` : '';
+    modalDescription.textContent = item.description || '';
+
+    if (modalLink && modalMuted) {
+      if (item.link) {
+        modalLink.href = item.link;
+        modalLink.hidden = false;
+        modalMuted.hidden = true;
+      } else {
+        modalLink.hidden = true;
+        modalMuted.hidden = false;
+      }
+    }
+
+    modalRoot.hidden = false;
+    document.body.classList.add('modal-open');
+
+    if (modalDialog && sourceCard) {
+      const sourceRect = sourceCard.getBoundingClientRect();
+      const dialogRect = modalDialog.getBoundingClientRect();
+      const translateX = sourceRect.left + sourceRect.width / 2 - (dialogRect.left + dialogRect.width / 2);
+      const translateY = sourceRect.top + sourceRect.height / 2 - (dialogRect.top + dialogRect.height / 2);
+      const scaleX = Math.max(sourceRect.width / dialogRect.width, 0.2);
+      const scaleY = Math.max(sourceRect.height / dialogRect.height, 0.2);
+
+      modalDialog.animate(
+        [
+          {
+            transform: `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`,
+            opacity: 0.65
+          },
+          { transform: 'translate(0, 0) scale(1, 1)', opacity: 1 }
+        ],
+        { duration: 260, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' }
+      );
+    }
+
+    modalBackdrop?.animate([{ opacity: 0 }, { opacity: 1 }], {
+      duration: 220,
+      easing: 'ease-out'
+    });
+  }
+
+  function closePortfolioModal() {
+    if (!modalRoot || modalRoot.hidden) return;
+    modalRoot.hidden = true;
+    document.body.classList.remove('modal-open');
+    if (modalMedia) {
+      modalMedia.innerHTML = '';
+    }
+  }
+
   filterBar?.addEventListener('click', (event) => {
     const button = event.target.closest('.filter-btn');
     if (!button) return;
@@ -166,6 +254,36 @@
     filterBar.querySelectorAll('.filter-btn').forEach((btn) => btn.classList.remove('is-active'));
     button.classList.add('is-active');
     renderCards(button.dataset.filter || 'all');
+  });
+
+  grid?.addEventListener('click', (event) => {
+    if (activeFilter !== 'all') return;
+
+    const interactiveTarget = event.target.closest('a, button');
+    if (interactiveTarget) return;
+
+    const card = event.target.closest('.portfolio-card.is-expandable');
+    if (!card) return;
+
+    const itemIndex = Number(card.dataset.itemIndex);
+    if (Number.isNaN(itemIndex)) return;
+
+    const item = portfolioItems[itemIndex];
+    if (!item) return;
+
+    openPortfolioModal(item, card);
+  });
+
+  modalRoot?.addEventListener('click', (event) => {
+    if (event.target.closest('[data-modal-close]')) {
+      closePortfolioModal();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closePortfolioModal();
+    }
   });
 
   // Mobile nav toggle.
