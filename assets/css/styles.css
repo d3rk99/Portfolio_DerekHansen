@@ -577,48 +577,123 @@ textarea:focus {
   padding-bottom: 2.4rem;
 }
 
-.resume-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 1rem;
+.resume-layout-wrap {
+  padding-top: 2.8rem;
 }
 
-.resume-panel {
-  background: linear-gradient(180deg, rgba(20, 27, 35, 0.95), rgba(16, 22, 29, 0.95));
+.resume-page {
+  padding: 0;
+}
+
+.resume-container {
+  background: linear-gradient(180deg, rgba(20, 27, 35, 0.96), rgba(16, 22, 29, 0.96));
   border: 1px solid var(--border);
-  border-radius: 0.9rem;
+  border-radius: 1rem;
   box-shadow: var(--shadow);
-  padding: 1rem;
+  padding: clamp(1.25rem, 2.8vw, 2.2rem);
 }
 
-.timeline-item {
-  border-top: 1px solid rgba(64, 215, 230, 0.15);
-  margin-top: 1rem;
-  padding-top: 1rem;
+.resume-header {
+  border-bottom: 1px solid rgba(64, 215, 230, 0.28);
+  padding-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 
-.timeline-item h4 {
+.resume-header h1 {
+  max-width: none;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.resume-contact {
+  margin: 0.7rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.resume-contact a {
+  color: var(--text);
+}
+
+.resume-contact a:hover,
+.resume-contact a:focus-visible {
+  color: var(--cyan);
+}
+
+.resume-section {
+  padding: 0;
+  margin-top: 1.25rem;
+}
+
+.resume-section + .resume-section {
+  border-top: 1px solid rgba(217, 139, 63, 0.2);
+  padding-top: 1.2rem;
+}
+
+.resume-section h2 {
+  max-width: none;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  margin-bottom: 0.7rem;
+}
+
+.resume-subheading {
+  margin-top: 1.2rem;
+}
+
+.resume-section p,
+.resume-section li {
+  color: #d2d9e3;
+}
+
+.resume-item {
+  padding: 0.9rem 0;
+}
+
+.resume-item + .resume-item {
+  border-top: 1px solid rgba(64, 215, 230, 0.14);
+}
+
+.resume-item h3 {
+  font-size: 1.03rem;
+  color: var(--text);
+}
+
+.resume-meta {
+  margin: 0.2rem 0 0.45rem;
+  color: var(--orange);
+  font-size: 0.92rem;
+}
+
+.resume-item ul,
+.resume-list {
   margin: 0;
-  font-family: Manrope, Inter, sans-serif;
+  padding-left: 1.1rem;
 }
 
-.pdf-frame-wrap {
-  margin-top: 0.8rem;
-  border: 1px solid #2c3a4c;
-  border-radius: 0.6rem;
-  overflow: hidden;
-  background: #0c1218;
+.resume-item li + li,
+.resume-list li + li {
+  margin-top: 0.24rem;
 }
 
-.pdf-frame {
-  width: 100%;
-  min-height: 540px;
-  border: 0;
+.resume-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.resume-list ul {
+  margin-top: 0.45rem;
 }
 
 @media (max-width: 860px) {
-  .resume-grid {
+  .resume-two-col {
     grid-template-columns: 1fr;
+  }
+
+  .resume-contact {
+    font-size: 0.9rem;
   }
 }
 
