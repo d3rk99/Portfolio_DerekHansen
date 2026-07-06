@@ -179,8 +179,10 @@ img {
   align-items: center;
   padding: clamp(3.25rem, 9vh, 6rem) 0 clamp(3rem, 7vh, 5rem);
   background:
-    radial-gradient(circle at 50% 32%, rgba(64, 215, 230, 0.1), transparent 28%),
-    radial-gradient(circle at 44% 60%, rgba(217, 139, 63, 0.09), transparent 22%),
+    linear-gradient(rgba(3, 5, 9, 0.78), rgba(3, 5, 9, 0.88)),
+    radial-gradient(circle at 50% 32%, rgba(64, 215, 230, 0.13), transparent 28%),
+    radial-gradient(circle at 44% 60%, rgba(217, 139, 63, 0.11), transparent 22%),
+    url("../images/TECHBackground.png") center / cover no-repeat,
     #030509;
 }
 
@@ -364,17 +366,67 @@ section {
 }
 
 .profile-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
   border-radius: 0.6rem;
-}
-
-.profile-card figcaption {
-  color: var(--muted);
-  font-size: 0.88rem;
-  margin-top: 0.8rem;
 }
 
 .about-content p {
   color: var(--muted);
+}
+
+.broadcast-experience {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.broadcast-card {
+  display: grid;
+  gap: 1.1rem;
+  background: linear-gradient(180deg, rgba(20, 27, 35, 0.92), rgba(16, 22, 29, 0.92));
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  box-shadow: var(--shadow);
+  min-height: 21rem;
+  padding: 1.4rem;
+}
+
+.broadcast-card h3 {
+  font-size: 1.15rem;
+}
+
+.broadcast-copy p:not(.eyebrow) {
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.broadcast-photos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  min-height: 9.5rem;
+}
+
+.broadcast-photos:empty {
+  display: none;
+}
+
+.broadcast-photos img,
+.broadcast-photos video,
+.broadcast-photos iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 9.5rem;
+  border: 1px solid rgba(64, 215, 230, 0.18);
+  border-radius: 0.6rem;
+}
+
+.broadcast-photos img,
+.broadcast-photos video {
+  object-fit: cover;
 }
 
 .skills-block {
@@ -691,6 +743,7 @@ textarea:focus {
 
 @media (max-width: 860px) {
   .about-grid,
+  .broadcast-experience,
   .contact-layout {
     grid-template-columns: 1fr;
   }
@@ -742,6 +795,10 @@ textarea:focus {
   .home-hero {
     min-height: calc(100vh - 72px);
     padding-top: 4rem;
+  }
+
+  .broadcast-photos {
+    grid-template-columns: 1fr;
   }
 }
 
